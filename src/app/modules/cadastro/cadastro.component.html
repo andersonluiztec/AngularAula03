@@ -1,0 +1,20 @@
+<h1>Cadastro</h1>
+<form [formGroup]="formCadastro" (submit)="handleCadastroUsuario()">
+    <cmail-form-group [campo]="this.formCadastro.get('nome')">
+        <input  formControlName="nome"
+                type="text" 
+                name="nome" 
+                placeholder="Nome"
+                cmailFormField />
+    </cmail-form-group>
+
+    <cmail-form-group [campo]="this.formCadastro.get('usuario')">
+        <input  formControlName="usuario"
+                type="text" 
+                name="usuario" 
+                placeholder="Usuario"
+                cmailFormField />
+    </cmail-form-group>
+
+    <button>Enviar</button>
+</form>

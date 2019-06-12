@@ -1,0 +1,76 @@
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+    <cmail-header></cmail-header>
+    <main class="mdl-layout__content">
+      <div class="page-content">
+        <ul>
+          <li *ngFor="let email of emails">
+            <b>Para:</b> {{ email.to }} <br>
+            <b>Assunto:</b> {{ email.subject }} <br>
+            <b>Conteúdo:</b> {{ email.body }} <br>
+          </li>
+          <br>
+        </ul>  
+        <div class="mdl-grid">
+          <!-- Floating Multiline Textfield -->
+          <button (click)="toogleOpenNewEmail()" class="globalFab tooltip btn mdl-button mdl-js-button mdl-button--fab mdl-button--colored"
+            role="tooltip" aria-label="Criar novo email">
+            <span class="material-icons">add</span>
+          </button>
+  
+          <!-- newEmail--active -->
+          <form #formEmail="ngForm" (submit)="sendEmail(formEmail)" [ngClass]="{ 'newEmail--active': isNewEmailOpen }" class="newEmail cmailForm">
+            <div class="newEmail__card demo-card-wide mdl-card mdl-shadow--2dp">
+              <div class="newEmail__titleArea mdl-card__title">
+                <h2 class="newEmail__title mdl-card__title-text">Novo Email</h2>
+              </div>
+              <div class="newEmail__body mdl-card__supporting-text">
+                <!-- Form Fields -->
+                <!-- [Para] -->
+                <div class="cmailInputForm">
+                  <div [ngClass]="{ 'is-invalid': campoPara.invalid && campoPara.touched }" class="mdl-textfield mdl-textfield--floating-label">
+                    <input #campoPara="ngModel" required email [(ngModel)]="email.to" type="email" name="para" id="para" placeholder=" " class="mdl-textfield__input">
+                    <span class="mdl-textfield__error">Informar um email é obrigatório!</span>
+                    <label class="mdl-textfield__label" for="para">Para: </label>
+                    <span class="mdl-textfield__formline"></span>
+                  </div>
+                </div><!-- ./[Para] -->
+  
+                <!-- [Assunto] -->
+                <div class="cmailInputForm">
+                  <div [ngClass]="{ 'is-invalid': campoAssunto.invalid && campoAssunto.touched }" class="mdl-textfield mdl-textfield--floating-label">
+                    <input #campoAssunto="ngModel" required [(ngModel)]="email.subject" type="text" name="assunto" id="assunto" placeholder=" " class="mdl-textfield__input">
+                    <span class="mdl-textfield__error">Informar um assunto é obrigatório!</span>
+                    <label class="mdl-textfield__label" for="assunto">Assunto: </label>
+                    <span class="mdl-textfield__formline"></span>
+                  </div>
+                </div><!-- ./[Assunto] -->
+  
+                <!-- [Conteúdo] -->
+                <div class="cmailInputForm">
+                  <div [ngClass]="{ 'is-invalid': campoConteudo.invalid && campoConteudo.touched }" class="mdl-textfield mdl-textfield--floating-label">
+                    <textarea #campoConteudo="ngModel" required [(ngModel)]="email.body" name="conteudo" id="conteudo" placeholder=" " class="mdl-textfield__input"></textarea>
+                    <span class="mdl-textfield__error">Informar um conteúdo é obrigatório!</span>
+                    <label class="mdl-textfield__label" for="conteudo">Conteúdo: </label>
+                    <span class="mdl-textfield__formline"></span>
+                  </div>
+                </div><!-- ./[Conteúdo] -->
+  
+                <!-- ./Form Fields -->
+              </div>
+              <div class="mdl-card__actions mdl-card--border">
+                <button class="mdl-button" [disabled]="formEmail.invalid">
+                  Enviar
+                </button>
+              </div>
+              <div class="newEmail__topMenu mdl-card__menu">
+                <button (click)="toogleOpenNewEmail()"  type="button" class="mdl-button mdl-button--icon">
+                  <span class="material-icons">close</span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+  
+      </div>
+    </main>
+  </div>

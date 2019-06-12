@@ -1,0 +1,21 @@
+  <div class="cmailInputForm">
+    <div [ngClass]="{ 'is-invalid': campo.invalid && campo.touched }" class="mdl-textfield mdl-textfield--floating-label">
+      <ng-content></ng-content>
+      <span *ngIf="campo.errors?.required" class="mdl-textfield__error">
+        Informar um {{ valorDaLabel }} é obrigatório!
+      </span>
+      <span *ngIf="campo.errors?.minlength" class="mdl-textfield__error">
+          Tamanho Minimo: {{ campo.errors.minlength.requiredLength }}. Atual: {{ campo.errors.minlength.actualLength }}
+      </span>
+      <span *ngIf="campo.errors?.maxlength" class="mdl-textfield__error">
+        Tamanho máximo: {{ campo.errors.maxlength.requiredLength }}. Atual: {{ campo.errors.maxlength.actualLength }} caracteres.
+      </span>
+
+      <span *ngIf="campo.errors?.usernameEmUso" class="mdl-textfield__error">
+          Este usuário já existe.
+        </span>
+
+      <label class="mdl-textfield__label" for="nome">{{ valorDaLabel }}: </label>
+      <span class="mdl-textfield__formline"></span>
+    </div>
+  </div>
